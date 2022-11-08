@@ -13,11 +13,14 @@ public class BallVerticalMovement : MonoBehaviour
         public float VecticalSpeed;
     }
 
+    // Every speedInterval seconds speed increases
     public float speedupInterval = 15;
-    public float speedupMultiplier = 1.5f;
+    // The value by which speed increases every speedupInterval seconds
+    public float speedupValue = 1;
+    
     public SpeedByDifficulty[] speedByDifficulty;
 
-    private float _currentSpeedMultiplier = 1;
+    private float _currentSpeedupValue = 1;
     private float _speedupTimestamp;
 
     private Rigidbody2D _physics;
@@ -41,10 +44,10 @@ public class BallVerticalMovement : MonoBehaviour
             ? new Vector2(_physics.velocity.x, speed * inputY)
             : new Vector2(_physics.velocity.x, -speed);
 
-        if (Time.time - _speedupTimestamp >= speedupInterval)
+        if (Time.timeSinceLevelLoad - _speedupTimestamp >= speedupInterval)
         {
-            _currentSpeedMultiplier += speedupMultiplier - 1;
-            _speedupTimestamp = Time.time;
+            _currentSpeedupValue += speedupValue; 
+            _speedupTimestamp = Time.timeSinceLevelLoad;
         }
     }
 
@@ -53,7 +56,7 @@ public class BallVerticalMovement : MonoBehaviour
         var speed = Array.Find(speedByDifficulty, s => s.Difficulty == _manager.CurrentDifficulty);
 
         if (speed != null)
-            return speed.VecticalSpeed * _currentSpeedMultiplier;
+            return speed.VecticalSpeed + _currentSpeedupValue;
         else
             Debug.LogError($"Speed is not specified for difficulty {_manager.CurrentDifficulty}");
         return 0;

@@ -94,7 +94,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d0c4d3bc95c998c49a79899000838491, type: 3}
-  m_Color: {r: 1, g: 0.33399945, b: 0.24056602, a: 1}
+  m_Color: {r: 1, g: 0.2688679, b: 0.30344862, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -151,11 +151,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedupInterval: 15
-  speedupMultiplier: 1.5
+  speedupValue: 1.5
   speedByDifficulty:
   - Difficulty: 0
     VecticalSpeed: 1
   - Difficulty: 1
-    VecticalSpeed: 2.5
+    VecticalSpeed: 2
   - Difficulty: 2
-    VecticalSpeed: 5
+    VecticalSpeed: 3.5
