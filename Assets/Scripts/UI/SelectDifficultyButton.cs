@@ -10,7 +10,6 @@ public class SelectDifficultyButton : MonoBehaviour
     private GameManager _manager;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         _manager = FindObjectOfType<GameManager>();
@@ -22,6 +21,8 @@ public class SelectDifficultyButton : MonoBehaviour
         ManagerOnDifficultyChanged();
     }
 
+    // Sets difficulty button state depending on selected difficulty
+    // Selected difficulty button becomes not interactable
     private void ManagerOnDifficultyChanged()
     {
         targetButton.interactable = _manager.CurrentDifficulty != buttonDifficulty;

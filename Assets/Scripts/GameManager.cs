@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-// Отвечает за общие игровые параметры: состояние игры, ее сложность
 public class GameManager : MonoBehaviour
 {
     public enum Difficulty
@@ -13,6 +10,11 @@ public class GameManager : MonoBehaviour
         Hard
     };
 
+    const string AttemptsPrefsKey = "attempts count";
+    public UnityEvent currentDifficultyChanged;
+    public UnityEvent gameOver;
+
+    public Difficulty initialDifficulty = Difficulty.Normal;
     private Difficulty _currentDifficulty;
 
     public Difficulty CurrentDifficulty
@@ -25,13 +27,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public UnityEvent currentDifficultyChanged;
+    public int AttemptsCount
+    {
+        get => PlayerPrefs.GetInt(AttemptsPrefsKey);
+        set => PlayerPrefs.SetInt(AttemptsPrefsKey, value);
+    }
 
+    public float AttemptTime => Time.timeSinceLevelLoad;
+
+    public void GameOver()
+    {
+        AttemptsCount++;
+        gameOver.Invoke();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        CurrentDifficulty = initialDifficulty;
     }
 
 
