@@ -10,6 +10,9 @@ public class OnCollision : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (targetTags.Contains(col.gameObject.tag))
+        {
             Collided.Invoke();
+            col.gameObject.SetActive(false);
+        }
     }
 }
